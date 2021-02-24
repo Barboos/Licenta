@@ -6,6 +6,9 @@ ruby '2.7.2'
 gem 'bootstrap-sass', '3.4.1'
 gem 'bcrypt', '3.1.13'
 gem "haml-rails", "~> 2.0"
+gem 'pry', '~> 0.13.1'
+gem 'gon'
+gem 'rabl-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

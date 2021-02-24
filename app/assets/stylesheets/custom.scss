@@ -82,10 +82,12 @@ footer {
     }
     small {
         float: left;
+        margin-left: 15px;
     }
     ul {
         float: right;
         list-style: none;
+        margin-right: 15px;
         li {
             float: left;
             margin-left: 15px;
@@ -161,6 +163,11 @@ input {
 }
 .navbar-inverse .navbar-nav li a{
     color: white;
+}
+
+.navbar-inverse .navbar-nav .dropdown-menu{
+    background-color: black;
+    min-width: auto;
 }
 .container{
     width: inherit;

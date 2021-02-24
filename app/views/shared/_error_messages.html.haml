@@ -1,4 +1,6 @@
 - if @user.errors.any?
+  :javascript
+    $(".signup_box").height(460+ 29.5 * gon.error_count);
   #error_explanation
     .alert.alert-danger
       The form contains #{pluralize(@user.errors.count, "error")}.

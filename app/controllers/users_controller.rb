@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
+      gon.error_count = @user.errors.count
       render "new"
     end
   end
