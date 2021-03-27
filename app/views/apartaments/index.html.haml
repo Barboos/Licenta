@@ -1,0 +1,14 @@
+= stylesheet_link_tag 'apartaments', media: 'all', |
+      'data-turbolinks-track': 'reload'    
+
+.index_apartament_container
+    %ul.list-group 
+        - @apartaments.each do |apartament|
+            %il.list-group-item 
+                = link_to apartament.title, apartament
+                = apartament.city
+                = apartament.county
+                = apartament.surface
+                = apartament.no_of_rooms
+                = apartament.price
+                = apartament.created_at

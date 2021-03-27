@@ -2,5 +2,14 @@
       'data-turbolinks-track': 'reload'    
 
 .home_page_container
-  %h1 Balamuc
+  %ul.list-group 
+    - @apartaments.each do |apartament|
+      %il.list-group-item 
+        = link_to apartament.title, apartament
+        = apartament.city
+        = apartament.county
+        = apartament.surface
+        = apartament.no_of_rooms
+        = apartament.price
+        = apartament.created_at
 = render 'layouts/footer'

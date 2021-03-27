@@ -1,0 +1,28 @@
+// Place all the styles related to the Apartaments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.new_apartament_container, .show_apartament_container, .index_apartament_container{
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
+    padding: 0;
+}
+
+.index_apartament_container{
+    padding: 30px 30px;
+}
+
+.new_apartament_box{
+    width: 75%;
+    height: 75%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+}
+
+
+
+

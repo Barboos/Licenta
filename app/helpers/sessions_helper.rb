@@ -19,4 +19,10 @@ module SessionsHelper
         @current_user = nil
     end
       
+
+    def check_current_user
+        if(current_user.id != params[:user_id].to_i)
+            redirect_to root_path
+        end
+    end
 end

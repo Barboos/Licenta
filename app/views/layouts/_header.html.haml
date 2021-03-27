@@ -15,7 +15,8 @@
           %li= link_to "Home", root_path
           %li= link_to "Help", help_path
           - if logged_in?
-            %li= link_to "Users", '#'
+            %li= link_to "Post Apartament", new_user_apartament_path(current_user.id)
+            %li= link_to "My Apartaments", user_apartaments_path(current_user.id)
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                 Account
