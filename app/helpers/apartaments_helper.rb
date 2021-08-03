@@ -14,13 +14,13 @@ module ApartamentsHelper
             a.surface = h["surface"].to_i
             a.price = h["price"].to_f
             a.partitioning = h["partitioning"]
-            a.age = h["age"].to_i
+            a.age = h["age"]
             a.user_id = h["user_id"].to_i
             a.city = h["city"]
             a.county = h["county"]
             a.title = h["title"]
             a.save!
-            puts row.to_hash
+            # puts row.to_hash
         end
     end
 end

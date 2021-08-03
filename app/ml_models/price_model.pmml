@@ -1,0 +1,2182 @@
+<?xml version="1.0"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.4">
+  <Header>
+    <Application name="Eps" version="0.3.8"/>
+  </Header>
+  <DataDictionary>
+    <DataField name="no_of_rooms" optype="continuous" dataType="double"/>
+    <DataField name="no_of_parking" optype="continuous" dataType="double"/>
+    <DataField name="no_of_terraces" optype="continuous" dataType="double"/>
+    <DataField name="no_of_bathrooms" optype="continuous" dataType="double"/>
+    <DataField name="surface" optype="continuous" dataType="double"/>
+    <DataField name="partitioning" optype="categorical" dataType="string">
+      <Value value="Decomandat"/>
+      <Value value="Semidecomandat"/>
+      <Value value="Vechi"/>
+    </DataField>
+    <DataField name="city" optype="categorical" dataType="string">
+      <Value value="Cluj"/>
+    </DataField>
+    <DataField name="county" optype="categorical" dataType="string">
+      <Value value="Cluj-Napoca"/>
+    </DataField>
+    <DataField name="age" optype="categorical" dataType="string">
+      <Value value="Decomandat"/>
+      <Value value="Nou"/>
+      <Value value="Semidecomandat"/>
+      <Value value="Vechi"/>
+    </DataField>
+  </DataDictionary>
+  <MiningModel functionName="regression" algorithmName="LightGBM">
+    <MiningSchema>
+      <MiningField name="price" usageType="target"/>
+      <MiningField name="no_of_rooms"/>
+      <MiningField name="no_of_parking"/>
+      <MiningField name="no_of_terraces"/>
+      <MiningField name="no_of_bathrooms"/>
+      <MiningField name="surface"/>
+      <MiningField name="partitioning"/>
+      <MiningField name="city"/>
+      <MiningField name="county"/>
+      <MiningField name="age"/>
+    </MiningSchema>
+    <Segmentation multipleModelMethod="sum">
+      <Segment id="1">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="407.96775653315524">
+            <True/>
+            <Node score="478.3489412865732">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="423.4498160588537">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="426.72436965657215">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="437.8884251759069">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="430.47794110728245">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                  <Node score="433.97079832507114">
+                    <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="431.81203212691287">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="427.29810241452503">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="425.2658443284743">
+                <SimplePredicate field="surface" operator="greaterThan" value="53.50000000000001"/>
+              </Node>
+            </Node>
+            <Node score="414.22869881886635">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="410.62794154597265">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="409.51294165278415">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="2">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-17.48196100305628">
+            <True/>
+            <Node score="45.86110595703125">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.5481065407395365">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.6010084986686707">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="10.598113839522654">
+                  <SimplePredicate field="surface" operator="greaterThan" value="70.50000000000001"/>
+                </Node>
+                <Node score="2.8927703431674416">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                  <Node score="6.266449999809265">
+                    <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="3.9778876965696166">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-0.08464903062389743">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.9136812333137758">
+                <SimplePredicate field="surface" operator="greaterThan" value="53.50000000000001"/>
+              </Node>
+            </Node>
+            <Node score="-11.8471122972893">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-15.087794494628907">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-16.0912939453125">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="3">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-15.733764591923467">
+            <True/>
+            <Node score="41.27499536132813">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.1569813358372656">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="3.0863630078055646">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="9.072285298947936">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-1.5323360500335694">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="8.150242729187012">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="2.5338756441305845">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+              <Node score="-0.2976759201441056">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+              </Node>
+              <Node score="-2.1068102213052606">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-10.662400991266423">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-14.626255071730842">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-13.603460439046225">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="4">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-14.160388127079717">
+            <True/>
+            <Node score="37.14749560546875">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-2.9456052780151367">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="2.7777266892519865">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="8.1650568679527">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-1.3791025485992432">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="7.335218707323074">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="2.280488102252667">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+              <Node score="0.020596701099026588">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.5652943085278235">
+                <SimplePredicate field="surface" operator="greaterThan" value="53.50000000000001"/>
+              </Node>
+            </Node>
+            <Node score="-9.59616102738814">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-12.147073211669923">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-13.093180572509766">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="5">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_rooms"/>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-12.744349613896123">
+            <True/>
+            <Node score="33.432745727539064">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-4.708647312521935">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.42502463545118063">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="8.027719313165417">
+                  <SimplePredicate field="surface" operator="greaterThan" value="70.50000000000001"/>
+                </Node>
+                <Node score="4.591532725758023">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                  <Node score="1.7000769217809042">
+                    <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="2.548769859031395">
+                <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="0.9127975781758627">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+                <Node score="-2.1000351409912112">
+                  <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+                </Node>
+              </Node>
+              <Node score="-0.592041277885437">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-8.636544938520952">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-11.917385155814035">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-10.957449086507161">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="6">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-11.469914231476961">
+            <True/>
+            <Node score="30.08947158813477">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-2.42460353076458">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="2.3702846050262454">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="7.013727590772842">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-1.198689736366272">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="5.957115868926049">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="1.6896679250093607">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+              <Node score="0.04858681155789283">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.4397464183069044">
+                <SimplePredicate field="surface" operator="greaterThan" value="53.50000000000001"/>
+              </Node>
+            </Node>
+            <Node score="-7.772890495531488">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-9.76942518234253">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-10.661239242553712">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="7">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-10.32292322229456">
+            <True/>
+            <Node score="27.08052404785156">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-2.2518222624255766">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="2.1020371848886668">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="6.337792703840468">
+                  <SimplePredicate field="age" operator="equal" value="Nou"/>
+                </Node>
+              </Node>
+              <Node score="-1.0788208656311036">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="5.361404435634613">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="1.5207011403181614">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+              <Node score="0.0437282100800545">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.2559691160917283">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-6.995601573134914">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-9.718977201552619">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-8.817875647544861">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="8">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-9.29063097635905">
+            <True/>
+            <Node score="24.37247162628174">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.1166162232557935">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="6.17172392209371">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="4.144372994559152">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="2.9938839728182014">
+                  <SimplePredicate field="surface" operator="greaterThan" value="64.50000000000001"/>
+                </Node>
+              </Node>
+              <Node score="-0.7169759321212769">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="2.3336338587105274">
+                  <SimplePredicate field="age" operator="equal" value="Nou"/>
+                  <Node score="-0.0010308501460859854">
+                    <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                  </Node>
+                </Node>
+                <Node score="-0.14046502749125164">
+                  <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+                </Node>
+                <Node score="-1.7133112816975036">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-6.296041130297112">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-7.847618114948273">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-8.688097045898438">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="9">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-8.361567631474248">
+            <True/>
+            <Node score="21.935224969863896">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-2.8049546480178833">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="5.554551475388664">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="3.7299357458239513">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="2.6944955609061503">
+                  <SimplePredicate field="surface" operator="greaterThan" value="64.50000000000001"/>
+                </Node>
+              </Node>
+              <Node score="-0.6452783727645874">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="2.10027051307261">
+                  <SimplePredicate field="age" operator="equal" value="Nou"/>
+                  <Node score="-0.0009278049752596886">
+                    <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                  </Node>
+                </Node>
+                <Node score="-0.1264185619354248">
+                  <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+                </Node>
+                <Node score="-1.5419800634014198">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-5.666437047900576">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-7.93430175171012">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-7.088290476799012">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="10">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="surface"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-7.5254109206023045">
+            <True/>
+            <Node score="19.741702697753908">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.809687445163727">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.26811948844364714">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="5.429329727006995">
+                  <SimplePredicate field="surface" operator="greaterThan" value="70.50000000000001"/>
+                </Node>
+                <Node score="0.7502220563590527">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                  <Node score="3.341012938099448">
+                    <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="1.7781817524521442">
+                <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-2.21508524954319">
+                <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+              </Node>
+              <Node score="1.0597333567483085">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+              <Node score="-0.12948709778163744">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-5.099793269417503">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-6.294806387424469">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-7.086769836425782">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="11">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-6.77286981564981">
+            <True/>
+            <Node score="15.021619338478363">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-2.449694056737991">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="0.9096980547904968">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="3.931332537531853">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-0.4389947843551636">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="0.26436357100804647">
+                  <SimplePredicate field="age" operator="equal" value="Nou"/>
+                  <Node score="-0.3152981108118748">
+                    <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+                  </Node>
+                  <Node score="2.7252695798873905">
+                    <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  </Node>
+                </Node>
+                <Node score="-1.2159476148454766">
+                  <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                </Node>
+                <Node score="0.2101316735858009">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-4.60307159461081">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-6.484992059071859">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-5.690583483378092">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="12">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-6.095582721851491">
+            <True/>
+            <Node score="16.88989081954956">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.397608555555344">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.7411215133666993">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="4.229611712914926">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="3.457845918238163">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="0.8455649235309699">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+              <Node score="1.2724404361512927">
+                <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-2.2428300633430482">
+                <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+              </Node>
+              <Node score="0.9483024392809187">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+              <Node score="-0.0869622386020163">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-4.188975508285291">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-5.040658912658692">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-5.786791151046753">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="13">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+          </MiningSchema>
+          <Node score="-5.4860244375688065">
+            <True/>
+            <Node score="12.808903557913645">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-2.105122747307732">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="0.619510725736618">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="3.043447425535747">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-0.3440183676206149">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="-2.076801070485796">
+                  <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                  <Node score="0.43175704228250605">
+                    <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                  </Node>
+                </Node>
+                <Node score="1.5191423889249565">
+                  <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-3.7238669961690904">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-5.307556067194258">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-4.561499369641146">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="14">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-4.937422122778717">
+            <True/>
+            <Node score="14.493501602172854">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.0487454330921175">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.533985637664795">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="3.46562109876562">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="2.6356855773925782">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="0.779838168162566">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                </Node>
+              </Node>
+              <Node score="0.8509184528280187">
+                <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-2.311931293487549">
+                <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+              </Node>
+              <Node score="0.8283130191621327">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+              <Node score="-0.0588938967689224">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-3.4477906214468406">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-4.028219015598298">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-4.7310725679397585">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="15">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+          </MiningSchema>
+          <Node score="-4.462394043207168">
+            <True/>
+            <Node score="11.50575566291809">
+              <SimplePredicate field="surface" operator="greaterThan" value="84.00000000000001"/>
+            </Node>
+            <Node score="-1.8143362768349194">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="0.4057173705101013">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="2.564120665089838">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-0.2904425382614136">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="-2.01896142414638">
+                  <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                  <Node score="0.5843171743246226">
+                    <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                  </Node>
+                </Node>
+                <Node score="1.2967940275733536">
+                  <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-4.219387834072113">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-2.3065483073393507">
+                <SimplePredicate field="surface" operator="greaterThan" value="49.00000000000001"/>
+              </Node>
+              <Node score="-3.9569113118307935">
+                <SimplePredicate field="surface" operator="greaterThan" value="32.50000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="16">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="surface"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_bathrooms"/>
+          </MiningSchema>
+          <Node score="-4.0161546021699905">
+            <True/>
+            <Node score="12.411816679596901">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-2.7341553965210914">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.3292625963687897">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="2.8272481198664066">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="1.9860422205924988">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="0.7918370890948507">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="0.5363120962072302">
+                <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-2.3529615097045897">
+                <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+              </Node>
+              <Node score="0.7342902047293527">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+              <Node score="-0.03608212885649308">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-3.797449133396149">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-2.075893521557252">
+                <SimplePredicate field="surface" operator="greaterThan" value="49.00000000000001"/>
+              </Node>
+              <Node score="-3.56122008732387">
+                <SimplePredicate field="surface" operator="greaterThan" value="32.50000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="17">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="age"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-3.581688258647919">
+            <True/>
+            <Node score="9.398284476143974">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-1.624590807869321">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="2.053489803314209">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="0.09314270641492761">
+                  <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+                </Node>
+              </Node>
+              <Node score="-0.2635453921097976">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="-1.9255459819521226">
+                  <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                  <Node score="0.18536659290916044">
+                    <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                  </Node>
+                </Node>
+                <Node score="1.1370349632727135">
+                  <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-2.1490348631143568">
+              <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+            </Node>
+            <Node score="-2.5931089515271397">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-3.5293701813771174">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="18">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_rooms"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-3.3031467837095265">
+            <True/>
+            <Node score="10.691542914390565">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-1.177978215331123">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.30245580673217776">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="2.3156499244548656">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="1.9518005847930908">
+                  <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+                  <Node score="0.09615055399556315">
+                    <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="-2.1970116710662846">
+                <SimplePredicate field="surface" operator="greaterThan" value="75.50000000000001"/>
+              </Node>
+              <Node score="0.4958888695157808">
+                <SimplePredicate field="surface" operator="greaterThan" value="57.50000000000001"/>
+                <Node score="-0.27195685577392575">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-3.057627893749036">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-1.6937634618194015">
+                <SimplePredicate field="surface" operator="greaterThan" value="45.50000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="19">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+          </MiningSchema>
+          <Node score="-2.9891868485344784">
+            <True/>
+            <Node score="8.107452922804015">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-1.859437188235196">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-1.4717023028267755">
+                <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+              </Node>
+              <Node score="1.305124044418335">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="1.604691355569022">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.841125121627535">
+                <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+              </Node>
+              <Node score="0.9075754139874432">
+                <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+              </Node>
+              <Node score="0.0827523432279888">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-1.7325673580169678">
+              <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+            </Node>
+            <Node score="-2.8947214979391833">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-2.195930836469896">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="20">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+          </MiningSchema>
+          <Node score="-2.720361458659172">
+            <True/>
+            <Node score="9.219123435974122">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-1.580046543121338">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-2.027311469768656">
+                <SimplePredicate field="surface" operator="greaterThan" value="79.00000000000001"/>
+              </Node>
+              <Node score="1.176610761218601">
+                <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                <Node score="2.037261595445521">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="-1.418749570124077">
+                  <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                  <Node score="1.2239595651626587">
+                    <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="0.1468482756614685">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-2.4946967539034395">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-1.3322526384282996">
+                <SimplePredicate field="surface" operator="greaterThan" value="45.50000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="21">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-2.4332763142055938">
+            <True/>
+            <Node score="7.083693978445871">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-1.3033593700045634">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-1.487114343819795">
+                <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+              </Node>
+              <Node score="0.9626433924624795">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="1.321826342173985">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.5759255014147078">
+                <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+              </Node>
+              <Node score="-0.1413476369319818">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="0.677420375637106">
+                  <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-1.3983231377601624">
+              <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+            </Node>
+            <Node score="-1.631257644891739">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-2.2391889185518834">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="22">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-2.2730329281091692">
+            <True/>
+            <Node score="7.952129859924317">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-1.093270550593734">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-2.2965136396473853">
+                <SimplePredicate field="surface" operator="greaterThan" value="79.00000000000001"/>
+              </Node>
+              <Node score="-0.025971998724826546">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="0.7797305285930634">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  <Node score="2.3374233118693035">
+                    <SimplePredicate field="surface" operator="greaterThan" value="55.50000000000001"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="0.6192048525810242">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+              </Node>
+              <Node score="-0.2638768059866769">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+            </Node>
+            <Node score="-1.8362159206753685">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-0.96382883588473">
+                <SimplePredicate field="surface" operator="greaterThan" value="49.00000000000001"/>
+              </Node>
+              <Node score="-2.14029994815588">
+                <SimplePredicate field="surface" operator="greaterThan" value="36.00000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="23">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-1.9917665141600152">
+            <True/>
+            <Node score="6.224244913373675">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-1.1813710576012022">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-1.416102558595163">
+                <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+              </Node>
+              <Node score="0.7428254127502442">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="1.1406972453707742">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.5481149666649956">
+                <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+              </Node>
+              <Node score="-1.136547587228858">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="-0.3299216768015986">
+                  <SimplePredicate field="surface" operator="greaterThan" value="56.50000000000001"/>
+                </Node>
+                <Node score="1.661239267985026">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-1.1359238266944887">
+              <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+            </Node>
+            <Node score="-1.2478514137864114">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-1.8231942424097576">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="24">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-1.1301981877822143">
+            <True/>
+            <Node score="6.847414283275604">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-2.668256559295039">
+              <SimplePredicate field="surface" operator="greaterThan" value="79.00000000000001"/>
+            </Node>
+            <Node score="-1.0000421135127544">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="0.03508821531783703">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="0.6732092181841534">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  <Node score="2.118160564104716">
+                    <SimplePredicate field="surface" operator="greaterThan" value="55.50000000000001"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="0.5910902559757233">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+              </Node>
+              <Node score="-0.21675348395393013">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+            </Node>
+            <Node score="-1.0948030110328428">
+              <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+            </Node>
+            <Node score="-1.8058227429023157">
+              <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-1.9247351987659933">
+              <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="25">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+          </MiningSchema>
+          <Node score="-1.6085453106806828">
+            <True/>
+            <Node score="5.515207014083863">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-1.0702019509815035">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-1.324141096185755">
+                <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+              </Node>
+              <Node score="0.558223759500604">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="0.9793749650319419">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.511187710762024">
+                <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+              </Node>
+              <Node score="-0.9678942610388218">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="-0.3582442988520083">
+                  <SimplePredicate field="surface" operator="greaterThan" value="56.50000000000001"/>
+                </Node>
+                <Node score="1.4561198838551839">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-1.4816469708555624">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-0.660761398739285">
+                <SimplePredicate field="surface" operator="greaterThan" value="45.50000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="26">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="age"/>
+          </MiningSchema>
+          <Node score="-1.6083360379934313">
+            <True/>
+            <Node score="5.22130249813199">
+              <SimplePredicate field="surface" operator="greaterThan" value="84.00000000000001"/>
+            </Node>
+            <Node score="-1.0896865662932396">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="0.054629203478495286">
+                <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                <Node score="1.1056053848266603">
+                  <SimplePredicate field="surface" operator="greaterThan" value="64.50000000000001"/>
+                  <Node score="-1.2641073351556606">
+                    <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  </Node>
+                  <Node score="-0.24556393830672554">
+                    <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+                  </Node>
+                </Node>
+                <Node score="1.0526423640789524">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-0.2988118126278832">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                <Node score="-0.14973459470839728">
+                  <SimplePredicate field="age" operator="equal" value="Vechi"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-1.3334823053134117">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-0.5946852189523203">
+                <SimplePredicate field="surface" operator="greaterThan" value="45.50000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="27">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-1.34096483124627">
+            <True/>
+            <Node score="5.655074165344239">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.047479051159274">
+              <SimplePredicate field="surface" operator="greaterThan" value="79.00000000000001"/>
+            </Node>
+            <Node score="-1.0554109239578249">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="0.09263501167297364">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="0.5859718245919794">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  <Node score="1.946945096651713">
+                    <SimplePredicate field="surface" operator="greaterThan" value="55.50000000000001"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="0.5820634961128235">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+              </Node>
+              <Node score="-0.23865867968528504">
+                <SimplePredicate field="partitioning" operator="equal" value="Decomandat"/>
+              </Node>
+            </Node>
+            <Node score="-1.2782928910748712">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.3913267736849578">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+                <Node score="-1.0543633908033372">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="28">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+          </MiningSchema>
+          <Node score="-1.1530452459286422">
+            <True/>
+            <Node score="4.4767287724358695">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-0.9237305595761254">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-1.2050790769082529">
+                <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+              </Node>
+              <Node score="0.42720408941570087">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="0.8900210028602964">
+                <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              </Node>
+              <Node score="-1.4639703484943936">
+                <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+              </Node>
+              <Node score="-0.7889256114545077">
+                <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                <Node score="-0.41605002569115684">
+                  <SimplePredicate field="surface" operator="greaterThan" value="56.50000000000001"/>
+                </Node>
+                <Node score="1.281987350980441">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-0.9058162212371826">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="-0.4234351734320323">
+                <SimplePredicate field="surface" operator="greaterThan" value="49.00000000000001"/>
+              </Node>
+              <Node score="-1.2513549834489823">
+                <SimplePredicate field="surface" operator="greaterThan" value="36.00000000000001"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="29">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-1.1080457758020472">
+            <True/>
+            <Node score="4.874051895141601">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.025616265881446">
+              <SimplePredicate field="surface" operator="greaterThan" value="79.00000000000001"/>
+            </Node>
+            <Node score="-1.0004936313629151">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="0.13689277671104255">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="0.5088887229561806">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  <Node score="1.779570698340734">
+                    <SimplePredicate field="surface" operator="greaterThan" value="55.50000000000001"/>
+                  </Node>
+                </Node>
+              </Node>
+              <Node score="0.5629392898082733">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+              </Node>
+              <Node score="-0.1621269476029181">
+                <SimplePredicate field="partitioning" operator="equal" value="Decomandat"/>
+              </Node>
+            </Node>
+            <Node score="-1.0351590485408388">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.27685875063357146">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+                <Node score="-0.8631776235997677">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="30">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-1.1822565670936338">
+            <True/>
+            <Node score="4.038201379776001">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-0.9751971090162123">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.9693015560507775">
+                <SimplePredicate field="surface" operator="greaterThan" value="72.50000000000001"/>
+              </Node>
+              <Node score="-0.9119657234712082">
+                <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+                <Node score="0.3989713369097029">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="0.764160323426837">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="-1.4133931992735183">
+                  <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                </Node>
+                <Node score="0.42099831941965465">
+                  <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                </Node>
+                <Node score="0.1447449003948885">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-0.48854658403678947">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="31">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-1.0640309103073613">
+            <True/>
+            <Node score="3.63438128062657">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-0.8776774045583364">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.8723714109510183">
+                <SimplePredicate field="surface" operator="greaterThan" value="72.50000000000001"/>
+              </Node>
+              <Node score="-0.8207691095092081">
+                <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+                <Node score="0.359074216570173">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="0.687744308653332">
+                  <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+                </Node>
+                <Node score="-1.272053850037711">
+                  <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+                </Node>
+                <Node score="0.3788985284599098">
+                  <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+                </Node>
+                <Node score="0.1302704123889699">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-0.4396919269310801">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="32">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_rooms"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-0.2152306630061223">
+            <True/>
+            <Node score="4.034525455474854">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-3.2140925357418677">
+              <SimplePredicate field="surface" operator="greaterThan" value="79.00000000000001"/>
+            </Node>
+            <Node score="1.3933341627319655">
+              <SimplePredicate field="surface" operator="greaterThan" value="70.50000000000001"/>
+            </Node>
+            <Node score="-0.6921876393831694">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+              <Node score="-0.19736683944175984">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="-0.3961874067783356">
+                  <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+                </Node>
+                <Node score="1.704857408659799">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="0.42558386709008905">
+                <SimplePredicate field="surface" operator="greaterThan" value="63.50000000000001"/>
+              </Node>
+              <Node score="-0.4026325130462647">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-1.1470705347401757">
+              <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              <Node score="-0.08002352621406317">
+                <SimplePredicate field="surface" operator="greaterThan" value="37.50000000000001"/>
+              </Node>
+            </Node>
+            <Node score="-1.4295402340267016">
+              <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="33">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-0.9089926596610778">
+            <True/>
+            <Node score="3.3231180354527066">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-0.19123141765594484">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.8361524164676667">
+                <SimplePredicate field="surface" operator="greaterThan" value="72.50000000000001"/>
+              </Node>
+              <Node score="-0.5441900491714478">
+                <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+                <Node score="0.2625156320844378">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="-0.0763581132888794">
+                  <SimplePredicate field="surface" operator="greaterThan" value="56.50000000000001"/>
+                  <Node score="-1.3693773474448767">
+                    <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  </Node>
+                  <Node score="0.7164472913742066">
+                    <SimplePredicate field="age" operator="equal" value="Vechi"/>
+                  </Node>
+                </Node>
+                <Node score="0.6524661755561829">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="-1.2865862208863963">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="-0.19732590094208718">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="34">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-0.8282841079375324">
+            <True/>
+            <Node score="2.9908061678068982">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-0.19889820347661558">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              <Node score="1.1143610833779627">
+                <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-1.3063188157230616">
+                <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+              </Node>
+              <Node score="0.8244248595088721">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+              <Node score="-1.318151413301627">
+                <SimplePredicate field="surface" operator="greaterThan" value="37.50000000000001"/>
+                <Node score="-0.23171566850260686">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-2.63776616368975">
+              <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-1.0092342915073518">
+              <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="-0.619987220496967">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+              </Node>
+              <Node score="1.3458853218613602">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="35">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-0.7808537321705973">
+            <True/>
+            <Node score="-2.3739895275660925">
+              <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="6.4330046724677095">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="1.0029249753641045">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+            <Node score="-2.766592490911484">
+              <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+            </Node>
+            <Node score="-1.0731207422588183">
+              <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+            </Node>
+            <Node score="0.8771216071421102">
+              <SimplePredicate field="surface" operator="greaterThan" value="62.50000000000001"/>
+            </Node>
+            <Node score="-0.09137261152267456">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.6498140894848368">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-0.5881304270512349">
+                <SimplePredicate field="surface" operator="greaterThan" value="56.50000000000001"/>
+              </Node>
+              <Node score="0.8529619166484246">
+                <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+              </Node>
+              <Node score="0.03778273748314899">
+                <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.0000000180025095e-35"/>
+                <Node score="-0.17137397575378419">
+                  <SimplePredicate field="surface" operator="greaterThan" value="45.50000000000001"/>
+                </Node>
+              </Node>
+              <Node score="-0.9751660210390887">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="36">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="no_of_rooms"/>
+            <MiningField name="partitioning"/>
+            <MiningField name="no_of_bathrooms"/>
+          </MiningSchema>
+          <Node score="-0.3985648264939135">
+            <True/>
+            <Node score="3.150299228668213">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-4.174913270365108">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="-1.1351534050190821">
+              <SimplePredicate field="surface" operator="greaterThan" value="43.50000000000001"/>
+              <Node score="-0.059900062424795966">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+                <Node score="1.5506531397501628">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="-0.11589068832068608">
+                  <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+                </Node>
+                <Node score="1.5365284138917925">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+              <Node score="0.9026324681613757">
+                <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-1.1873512929136103">
+                <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+              </Node>
+              <Node score="0.4873011975577384">
+                <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+              </Node>
+              <Node score="0.05761681014093859">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+            <Node score="-0.8767563212302424">
+              <SimplePredicate field="surface" operator="greaterThan" value="36.00000000000001"/>
+            </Node>
+            <Node score="-0.16675736470655964">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="37">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+          </MiningSchema>
+          <Node score="-0.6771193967711542">
+            <True/>
+            <Node score="-2.239039080483573">
+              <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="5.855585274696351">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="0.8123692629129992">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+            <Node score="-2.3440607013702395">
+              <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+            </Node>
+            <Node score="-0.9321844064671061">
+              <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+            </Node>
+            <Node score="0.731999538213976">
+              <SimplePredicate field="surface" operator="greaterThan" value="62.50000000000001"/>
+            </Node>
+            <Node score="0.016409201235384554">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.6596601299617602">
+                <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+              </Node>
+              <Node score="-0.5623741542970813">
+                <SimplePredicate field="surface" operator="greaterThan" value="56.50000000000001"/>
+              </Node>
+              <Node score="0.7511573002888606">
+                <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+              </Node>
+              <Node score="-1.1287013789881832">
+                <SimplePredicate field="surface" operator="greaterThan" value="42.50000000000001"/>
+                <Node score="0.0652844563126564">
+                  <SimplePredicate field="age" operator="equal" value="Vechi"/>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="38">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-0.6094074985673351">
+            <True/>
+            <Node score="-2.015135211036319">
+              <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="5.2700267513394365">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="0.731132310045802">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+            <Node score="-2.1096545848846437">
+              <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+            </Node>
+            <Node score="-0.8389660088912301">
+              <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+            </Node>
+            <Node score="0.5818346181431332">
+              <SimplePredicate field="surface" operator="greaterThan" value="60.50000000000001"/>
+            </Node>
+            <Node score="0.11077512079669583">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.2625111919182998">
+                <SimplePredicate field="surface" operator="greaterThan" value="40.50000000000001"/>
+                <Node score="-0.7808238495479931">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="-0.7941970901055769">
+                  <SimplePredicate field="age" operator="equal" value="Vechi"/>
+                  <Node score="0.7863278028639881">
+                    <SimplePredicate field="surface" operator="greaterThan" value="49.00000000000001"/>
+                    <Node score="0.3584985804557801">
+                      <SimplePredicate field="surface" operator="greaterThan" value="54.50000000000001"/>
+                    </Node>
+                  </Node>
+                </Node>
+                <Node score="-0.8025863269279743">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="39">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="0.014757685039354408">
+            <True/>
+            <Node score="-1.8136216640472413">
+              <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="4.7430240898132325">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="0.6580190757046576">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+            <Node score="-1.898689178466797">
+              <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+            </Node>
+            <Node score="-0.3771715939044953">
+              <SimplePredicate field="age" operator="equal" value="Nou"/>
+              <Node score="1.1240514934062957">
+                <SimplePredicate field="surface" operator="greaterThan" value="64.50000000000001"/>
+              </Node>
+              <Node score="-0.43737264438108964">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                <Node score="0.5693567849494315">
+                  <SimplePredicate field="surface" operator="greaterThan" value="44.50000000000001"/>
+                </Node>
+              </Node>
+              <Node score="-1.0966907194682531">
+                <SimplePredicate field="surface" operator="greaterThan" value="51.00000000000001"/>
+              </Node>
+            </Node>
+            <Node score="-1.2950424221845775">
+              <SimplePredicate field="surface" operator="greaterThan" value="64.50000000000001"/>
+            </Node>
+            <Node score="0.899890260469346">
+              <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+            </Node>
+            <Node score="-0.9499743900952802">
+              <SimplePredicate field="surface" operator="greaterThan" value="37.50000000000001"/>
+              <Node score="-0.16094672428934198">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="40">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_parking"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_rooms"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-0.03286434570948283">
+            <True/>
+            <Node score="2.278299411773682">
+              <SimplePredicate field="no_of_parking" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-4.4352430213581435">
+              <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+            </Node>
+            <Node score="0.5930552138601031">
+              <SimplePredicate field="surface" operator="greaterThan" value="69.50000000000001"/>
+              <Node score="1.277188265323639">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+              </Node>
+            </Node>
+            <Node score="-0.588657768684275">
+              <SimplePredicate field="age" operator="equal" value="Nou"/>
+              <Node score="-0.21460762514787565">
+                <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+                <Node score="1.688724051628794">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                  <Node score="0.5529358993877065">
+                    <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="-1.0988295352458954">
+              <SimplePredicate field="surface" operator="greaterThan" value="64.50000000000001"/>
+            </Node>
+            <Node score="0.5784655964892844">
+              <SimplePredicate field="surface" operator="greaterThan" value="59.00000000000001"/>
+            </Node>
+            <Node score="-0.9227018681665262">
+              <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="-0.22558956648174086">
+                <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="41">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_terraces"/>
+            <MiningField name="partitioning"/>
+          </MiningSchema>
+          <Node score="-0.5155685870878158">
+            <True/>
+            <Node score="-1.7623321374257406">
+              <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="4.3899956226348875">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="0.5698186083980229">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+            <Node score="-2.1421921253204346">
+              <SimplePredicate field="surface" operator="greaterThan" value="67.50000000000001"/>
+              <Node score="0.07839405179023744">
+                <SimplePredicate field="age" operator="equal" value="Nou"/>
+              </Node>
+            </Node>
+            <Node score="0.6177820744533693">
+              <SimplePredicate field="surface" operator="greaterThan" value="62.50000000000001"/>
+            </Node>
+            <Node score="0.16887440546866386">
+              <SimplePredicate field="surface" operator="greaterThan" value="31.000000000000004"/>
+              <Node score="-0.12478029086039617">
+                <SimplePredicate field="surface" operator="greaterThan" value="40.50000000000001"/>
+                <Node score="-0.7236362457275392">
+                  <SimplePredicate field="no_of_terraces" operator="greaterThan" value="1.5000000000000002"/>
+                </Node>
+                <Node score="-0.63104773868214">
+                  <SimplePredicate field="age" operator="equal" value="Vechi"/>
+                  <Node score="0.8008437478024026">
+                    <SimplePredicate field="surface" operator="greaterThan" value="49.00000000000001"/>
+                    <Node score="0.18190568685531616">
+                      <SimplePredicate field="surface" operator="greaterThan" value="55.50000000000001"/>
+                    </Node>
+                  </Node>
+                </Node>
+                <Node score="-0.7307986571508296">
+                  <SimplePredicate field="partitioning" operator="equal" value="Semidecomandat"/>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+      <Segment id="42">
+        <True/>
+        <TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+          <MiningSchema>
+            <MiningField name="no_of_bathrooms"/>
+            <MiningField name="surface"/>
+            <MiningField name="age"/>
+            <MiningField name="no_of_rooms"/>
+          </MiningSchema>
+          <Node score="-0.8880031055874295">
+            <True/>
+            <Node score="-1.5860989547911144">
+              <SimplePredicate field="no_of_bathrooms" operator="greaterThan" value="1.5000000000000002"/>
+              <Node score="3.950996181488037">
+                <SimplePredicate field="surface" operator="greaterThan" value="80.50000000000001"/>
+              </Node>
+              <Node score="0.5128367557473805">
+                <SimplePredicate field="age" operator="equal" value="Vechi"/>
+              </Node>
+            </Node>
+            <Node score="1.4269098617813805">
+              <SimplePredicate field="no_of_rooms" operator="greaterThan" value="2.5000000000000004"/>
+              <Node score="-1.609839115234522">
+                <SimplePredicate field="surface" operator="greaterThan" value="64.50000000000001"/>
+                <Node score="-2.6189971117746262">
+                  <SimplePredicate field="surface" operator="greaterThan" value="74.00000000000001"/>
+                </Node>
+              </Node>
+            </Node>
+            <Node score="1.9475360787340574">
+              <SimplePredicate field="surface" operator="greaterThan" value="63.50000000000001"/>
+            </Node>
+            <Node score="-1.1874051221211752">
+              <SimplePredicate field="surface" operator="greaterThan" value="56.50000000000001"/>
+            </Node>
+            <Node score="0.3613753354549408">
+              <SimplePredicate field="surface" operator="greaterThan" value="52.50000000000001"/>
+            </Node>
+            <Node score="-0.6999984195286578">
+              <SimplePredicate field="surface" operator="greaterThan" value="47.50000000000001"/>
+            </Node>
+            <Node score="0.5047807772954305">
+              <SimplePredicate field="surface" operator="greaterThan" value="43.50000000000001"/>
+            </Node>
+            <Node score="0.2768646348090399">
+              <SimplePredicate field="no_of_rooms" operator="greaterThan" value="1.5000000000000002"/>
+            </Node>
+            <Node score="-0.04354306030273438">
+              <SimplePredicate field="age" operator="equal" value="Vechi"/>
+            </Node>
+          </Node>
+        </TreeModel>
+      </Segment>
+    </Segmentation>
+  </MiningModel>
+</PMML>

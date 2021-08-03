@@ -9,6 +9,7 @@ gem "haml-rails", "~> 2.0"
 gem 'pry', '~> 0.13.1'
 gem 'gon'
 gem 'rabl-rails'
+gem 'eps'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
