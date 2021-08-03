@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_114437) do
+ActiveRecord::Schema.define(version: 2021_08_03_163329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 2021_03_27_114437) do
     t.integer "user_id"
     t.string "county"
     t.string "city"
+    t.integer "no_of_bathrooms"
+    t.integer "no_of_parking"
+    t.integer "no_of_terraces"
+    t.string "age"
+    t.string "partitioning"
     t.index ["city"], name: "index_apartaments_on_city"
     t.index ["county"], name: "index_apartaments_on_county"
     t.index ["user_id"], name: "index_apartaments_on_user_id"
