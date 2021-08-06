@@ -1,0 +1,46 @@
+= stylesheet_link_tag 'apartaments', media: 'all', |
+      'data-turbolinks-track': 'reload'    
+
+.show_apartament_container
+    -# - flash.each do |message_type, message|
+    -#     %div{class: "alert alert-#{message_type}"}= message
+    .apartament-info 
+        .apartament-header
+            .apartament-logo
+                = image_tag "house4.jpg", class: 'apartament-logo'
+            .apartament-title 
+                = @apartament.title
+            .apartament-price 
+                = "#{@apartament.price} € / luna"
+            .apartament-city-county
+                .apartament-city
+                    = @apartament.city
+                .apartament-county
+                    = @apartament.county
+        .apartament-footer
+            .description 
+                %span Descriere 
+                = @apartament.description
+            %hr
+            .numbers
+                .item
+                    %span 
+                        = "Zone: #{@apartament.zone}"
+                .item
+                    %span
+                        = "Number of rooms: #{@apartament.no_of_rooms}"
+                .item
+                    %span
+                        = "Surface: #{@apartament.surface} mp"
+                .item 
+                    %span
+                        = "Number of bathrooms: #{@apartament.no_of_bathrooms}"
+                .item
+                    %span
+                        = "Number of terraces: #{@apartament.no_of_terraces}"
+                .item 
+                    %span
+                        = "Age: #{@apartament.age}"
+                .item
+                    %span
+                        = "Partitioning: #{@apartament.partitioning}"

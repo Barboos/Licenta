@@ -1,0 +1,32 @@
+= stylesheet_link_tag 'apartaments', media: 'all', |
+      'data-turbolinks-track': 'reload'    
+
+.new_apartament_container
+  - provide(:title, 'Predict Price')
+  .new_apartament_box 
+    %h1 Predict Price
+    - flash.each do |message_type, message|
+      %div{class: "alert alert-#{message_type}"}= message
+    = form_with(model: @apartament, url: predict_price_path, local: true) do |f|
+      = render 'shared/apartament_error_messages'
+      = f.label :title
+      = f.text_field :title, class: 'form-control'
+      = f.label :city
+      = f.text_field :city, class: 'form-control'
+      = f.label :county
+      = f.text_field :county, class: 'form-control'
+      = f.label :no_of_rooms
+      = f.text_field :no_of_rooms, class: 'form-control'
+      = f.label :surface
+      = f.text_field :surface, class: 'form-control'
+      = f.label :no_of_bathrooms
+      = f.text_field :no_of_bathrooms, class: 'form-control'
+      = f.label :no_of_terraces
+      = f.text_field :no_of_terraces, class: 'form-control'
+      = f.label :age
+      = f.text_field :age, class: 'form-control'
+      = f.label :partitioning
+      = f.text_field :partitioning, class: 'form-control'
+      = f.label :zone
+      = f.text_field :zone, class: 'form-control'
+      = f.submit "Predict", class: "btn btn-primary"
