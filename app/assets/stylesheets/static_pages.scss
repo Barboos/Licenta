@@ -10,6 +10,37 @@
     justify-content: center;
 }
 
+.index_apartament_container{
+    height: 100vh;
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
+    // background: url(buildings.jpg) no-repeat center;
+    // background-size: cover;
+    // background-position: center;
+    // background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index_apartament_container ul{
+    padding: 20px;
+    background: white;
+}
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    a{
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    margin-bottom: 0;
+}
+
 .help_page_container{
     height: 100%;
     width: 100%;

@@ -3,7 +3,7 @@ class ApartamentsController < ApplicationController
     before_action :check_current_user, only: [:index, :new, :create]
 
     def index
-        @apartaments = current_user.apartaments
+        @apartaments = current_user.apartaments.paginate(per_page: 16, page: params[:page])
     end
 
     def new 

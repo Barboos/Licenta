@@ -1,15 +1,20 @@
 = stylesheet_link_tag 'static_pages', media: 'all', |
       'data-turbolinks-track': 'reload'    
 
-.home_page_container
-  %ul.list-group 
-    - @apartaments.each do |apartament|
-      %il.list-group-item 
-        = link_to apartament.title, apartament
-        -# = apartament.city
-        -# = apartament.county
-        -# = apartament.surface
-        -# = apartament.no_of_rooms
-        -# = apartament.price
-        -# = apartament.created_at
--# = render 'layouts/footer'
+.index_apartament_container
+    %ul.w3-ul.w3-card-4
+        - @apartaments.each do |apartament|
+            %il.w3-bar
+                .w3-bar-item
+                    %span.w3-large 
+                        = link_to "#{apartament.title} | #{apartament.price} euro", apartament
+                    %br/
+                        
+                
+                -# = apartament.city
+                -# = apartament.county
+                -# = apartament.surface
+                -# = apartament.no_of_rooms
+                -# = apartament.price
+                -# = apartament.created_at
+        = will_paginate @apartaments

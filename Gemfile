@@ -10,6 +10,7 @@ gem 'pry', '~> 0.13.1'
 gem 'gon'
 gem 'rabl-rails'
 gem 'eps'
+gem 'will_paginate', '~> 3.1.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

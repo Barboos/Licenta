@@ -2,14 +2,19 @@
       'data-turbolinks-track': 'reload'    
 
 .index_apartament_container
-    .index_ul_div
-        %ul.list-group 
-            - @apartaments.each do |apartament|
-                %il.list-group-item 
-                    = link_to apartament.title, apartament
-                    -# = apartament.city
-                    -# = apartament.county
-                    -# = apartament.surface
-                    -# = apartament.no_of_rooms
-                    -# = apartament.price
-                    -# = apartament.created_at
+    %ul.w3-ul.w3-card-4
+        - @apartaments.each do |apartament|
+            %il.w3-bar
+                .w3-bar-item
+                    %span.w3-large 
+                        = link_to "#{apartament.title} | #{apartament.price} euro", apartament
+                    %br/
+                        
+                
+                -# = apartament.city
+                -# = apartament.county
+                -# = apartament.surface
+                -# = apartament.no_of_rooms
+                -# = apartament.price
+                -# = apartament.created_at
+        = will_paginate @apartaments
