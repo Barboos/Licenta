@@ -13,7 +13,7 @@
       %ul#bs-example-navbar-collapse-1.nav.navbar-nav.navbar-right.collapse.navbar-collapse
         %ul.nav.navbar-nav.navbar-right
           %li= link_to "Home", root_path
-          %li= link_to "Help", help_path
+          %li= link_to "Predict Price", predict_price_path
           - if logged_in?
             %li= link_to "Post Apartament", new_user_apartament_path(current_user.id)
             %li= link_to "My Apartaments", user_apartaments_path(current_user.id)

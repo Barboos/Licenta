@@ -1,6 +1,6 @@
 class PriceModel < Eps::Base
     def build
-      apartaments = Apartament.all
+      apartaments = Apartament.where("price < 1000")
   
       # train
       data = apartaments.map { |v| features(v) }
@@ -15,7 +15,7 @@ class PriceModel < Eps::Base
     end
   
     def predict(house)
-      model.predict(features(house))
+      model.predict(features(house)).round
     end
   
     private
@@ -23,7 +23,6 @@ class PriceModel < Eps::Base
     def features(apartament)
       {
         no_of_rooms: apartament.no_of_rooms,
-        no_of_parking: apartament.no_of_parking,
         no_of_terraces: apartament.no_of_terraces,
         no_of_bathrooms: apartament.no_of_bathrooms,
         price: apartament.price,
@@ -31,7 +30,9 @@ class PriceModel < Eps::Base
         partitioning: apartament.partitioning,
         city: apartament.city,
         county: apartament.county,
-        age: apartament.age
+        # no_of_parking: apartament.no_of_parking,
+        age: apartament.age,
+        zone: apartament.zone
       }
     end
 
