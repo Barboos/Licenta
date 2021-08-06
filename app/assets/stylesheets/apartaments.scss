@@ -29,7 +29,7 @@
 }
 
 .apartament-header{
-    background: #2b4e6ee7;
+    background: #2b4e6ec5;
     padding: 30px 60px;
 }
 
@@ -137,7 +137,13 @@ hr{
 
 
 .index_apartament_container{
-    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index_ul_div, .index_ul_div ul{
+    background-color: black;
 }
 
 .new_apartament_box{
@@ -150,7 +156,7 @@ hr{
     box-sizing: border-box;
     padding: 30px 30px;
     .formular{
-        width: 75%;
+        width: 30%;
         height: 80%;
         top: 50%;
         left: 50%;
