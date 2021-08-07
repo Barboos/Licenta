@@ -15,7 +15,7 @@
     width: 100%;
     margin-top: 50px;
     padding: 0;
-    background: url(buildings.jpg) no-repeat center;
+    background: asset-url("buildings.jpg") no-repeat center;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -183,7 +183,7 @@ hr{
 // }
 
 .new_apartament_container{
-    background: url(buildings.jpg) no-repeat center;
+    background: asset-url("buildings.jpg") no-repeat center;
     background-size: cover;
     background-position: center;
 }
