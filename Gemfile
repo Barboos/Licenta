@@ -11,6 +11,8 @@ gem 'gon'
 gem 'rabl-rails'
 gem 'eps'
 gem 'will_paginate', '~> 3.1.0'
+gem 'ruby-graphviz'
+gem 'rails-erd', group: :development
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

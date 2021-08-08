@@ -15,8 +15,8 @@
           %li= link_to "Home", root_path
           %li= link_to "Predict Price", predict_price_path
           - if logged_in?
-            %li= link_to "Post Apartament", new_user_apartament_path(current_user.id)
-            %li= link_to "My Apartaments", user_apartaments_path(current_user.id)
+            %li= link_to "Post Apartment", new_user_apartament_path(current_user.id)
+            %li= link_to "My Apartments", user_apartaments_path(current_user.id)
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                 Account
